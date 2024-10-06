@@ -9,14 +9,15 @@ import { Input } from "@/components/ui/input"
 import { useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import OverviewPage from "./overview"
-import UsersPage from "./users"
-import AnalyticsPage from "./analytics"
-import SettingsPage from "./settings"
+import OverviewPage from "./overview.jsx"
+import UsersPage from "./users.jsx"
+import AnalyticsPage from "./analytics.jsx"
+import SettingsPage from "./settings.jsx"
 import Image from "next/image";
 import { MdOutlineWifi } from "react-icons/md";
 import { HiQuestionMarkCircle } from "react-icons/hi2";
 import { LuRefreshCw } from "react-icons/lu";
+import { PiTimerDuotone } from "react-icons/pi";
 import {
   Select,
   SelectContent,
@@ -143,6 +144,13 @@ export default function Dashboard() {
  
               <Button size="icon" variant="ghost">
                 <LuRefreshCw className="h-5 w-5" />
+                {/* <HiQuestionMarkCircle className="h-5 w-5" /> */}
+                <span className="sr-only">Notifications</span>
+              </Button>
+
+              <Button size="icon" variant="ghost">
+                <p>Last 6 hours</p>
+                <PiTimerDuotone className="h-5 w-5" />
                 {/* <HiQuestionMarkCircle className="h-5 w-5" /> */}
                 <span className="sr-only">Notifications</span>
               </Button>
