@@ -117,9 +117,9 @@ export default function OverviewPage() {
           </CardContent>
         </Card> */}
       </div>
-      <div className="h-[100px]">
+      {/* <div className="h-[100px]">
         <PuneSafronRack />
-      </div>
+      </div> */}
 
         <div className="h-[200px] w-[100%]">
           <h2>Pune Saffron Farm Condition Monitor</h2>
