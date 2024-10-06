@@ -71,10 +71,10 @@ let rackArrays = [
 ]
 
 export const DetailsCard = ({name, number}) =>  (
-    <div className="font-bold rounded border-[1px] border-black p-2 w-[100px] mx-2">
+    <div className="font-bold rounded border-[1px] border-black p-2 w-[180px] mx-2">
       <h2 className="">{name}</h2>
       <h1 className="text-2xl md:text-4xl">{number}</h1>
-      <div className="h-[100px] w-[50px]">
+      <div className="h-[100px] w-[150px]">
         {/* <Chart2 /> */}
         <PuneSafronRack />
       </div>

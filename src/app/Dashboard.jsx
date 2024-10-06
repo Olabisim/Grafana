@@ -9,10 +9,10 @@ import { Input } from "@/components/ui/input"
 import { useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import OverviewPage from "./overview.jsx"
-import UsersPage from "./users.jsx"
-import AnalyticsPage from "./analytics.jsx"
-import SettingsPage from "./settings.jsx"
+import OverviewPage from "./Overview.jsx"
+import UsersPage from "./Users.jsx"
+import AnalyticsPage from "./Analytics.jsx"
+import SettingsPage from "./Settings.jsx"
 import Image from "next/image";
 import { MdOutlineWifi } from "react-icons/md";
 import { HiQuestionMarkCircle } from "react-icons/hi2";
