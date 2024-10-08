@@ -87,7 +87,7 @@ export default function OverviewPage() {
       <div className="flex flex-wrap ">
       {
         rackArrays.map(x => (
-          <DetailsCard name={x.name} number={x.number} />
+          <DetailsCard key={x.number} name={x.name} number={x.number} />
         ))
       }
         {/* <Card className="col-span-4">

@@ -50,7 +50,17 @@ export function SelectDemo() {
 
 
 export default function Dashboard() {
+
   const [activeTab, setActiveTab] = useState("overview")
+
+  // token
+  let token;
+  if (typeof localStorage !== "undefined") {
+    token = localStorage.getItem('grafana_token')
+  }
+  
+  console.log('this is the token')
+  console.log(token)
 
   const router = useRouter()
 
@@ -130,7 +140,7 @@ export default function Dashboard() {
                 <span className="sr-only">Notifications</span>
               </Button>
               <Button size="sm" onClick={() => router.push('/login')}>
-                <Link href="#">Log in</Link>
+                <Link href="#">{token ? 'Logged In' : 'Log in'}</Link>
               </Button>
             </div>
           </div>
@@ -149,7 +159,7 @@ export default function Dashboard() {
               </Button>
 
               <Button size="icon" variant="ghost">
-                <p>Last 6 hours</p>
+                <p className="mx-3">Last 6 hours</p>
                 <PiTimerDuotone className="h-5 w-5" />
                 {/* <HiQuestionMarkCircle className="h-5 w-5" /> */}
                 <span className="sr-only">Notifications</span>

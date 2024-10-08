@@ -1,7 +1,7 @@
 
 'use client'
 
-import React from "react";
+import React, {useState} from "react";
 import axios from "axios";
 // import Container from "react-bootstrap/Container";
 // import Navbar from "react-bootstrap/Navbar";
@@ -13,10 +13,136 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 function LoginScreen() {
 
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    console.log('this is the email that is coming in')
+    console.log(email)
+
+    console.log('this is the password that is coming in')
+    console.log(password)
+
     const router = useRouter()
+
+    
+    // const makeRequest2 = async (e) => {
+    //     e.preventDefault();
+    //     console.log('something making request')
+    //     toast.error("Password must be over 6 character", {
+    //         position: "top-right",
+    //       });
+    // }
+
+    const makeRequest = async (e) => {
+    
+        e.preventDefault();
+
+        if(email.length < 6 || password.length < 3 ) {
+            toast.error("Password or email must be greater than 6 characters", {
+                position: "top-right",
+            });
+            return;
+        }
+
+        console.log('entered the make request route')
+
+        // if(email.length > 5) {
+        //     toast.error("email is less than 5", {
+        //         position: "top-right",
+        //     });
+        //     return;
+        // }
+        setLoading(true)
+        
+      try {
+
+        const res = await fetch("http://tag4track.com:8087/api/login", {
+          method: "POST",
+           mode: 'no-cors',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username: email, password }),
+        });
+
+        setLoading(false)
+
+
+        console.log('res')
+        console.log(res)
+
+        if (res.status === 400) {
+          toast.error("Password must be over 6 character", {
+            position: "top-right",
+          });
+        }
+        if (res.status === 500) {
+          toast.error("Email already exist,try another email", {
+            position: "top-right",
+          });
+        }
+        if (res.status === 200 || 201 ) {
+          // setactiontype('login')
+          toast.success("Logged In successfully", {
+            position: "top-right",
+          });
+          router.push('/');
+          
+            if (typeof localStorage !== "undefined") {
+                localStorage.setItem('grafana_token', 'kDgqNBO3AfX04O9x_lfper6BY_ZQsbM35ZLE_VTBLykr3W3y_cxrMIA05zH_Vo1ycNn-QsKN0sFVn3a4qwg7Rw==')
+            }
+        }
+        // setEmail('')
+        // setPassword('')
+
+      } catch (err) {
+        
+        setLoading(false)
+        // setErr(true);
+        console.log(err);
+      }
+
+        // axios
+        //   .post(
+        //       "http://tagard.in:8005/usr/login",
+
+        //       {
+        //           email,
+        //           password,
+        //       }
+        //   )
+        //   .then((response) => {
+            
+        //         console.log(response);
+        //         console.log(response.status);
+        //         if (response.status === 200) {
+        //             toast.success("token has been sent to your mail", {
+        //                 position: "top-right",
+        //             });
+        //         } else {
+        //             toast.error("failed to send token", {
+        //                 position: "top-right",
+        //             });
+        //             // setErr("User with this email not registered")
+        //         }
+                
+        //         setLoading(false)
+
+        //   })
+        //   .catch((error) => {
+        //     toast.error("request failed", {
+        //         position: "top-right",
+        //     });
+        //       console.error(error);
+              
+        //     setLoading(false)
+        //   });
+  };
 
 
   return (
@@ -41,15 +167,15 @@ function LoginScreen() {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="m@example.com" required />
+            <Input id="email" type="email" placeholder="m@example.com" required onChange={(e) => setEmail(e.target.value) } />
           </div>
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" required />
+            <Input id="password" type="password" required onChange={(e) => setPassword(e.target.value) } />
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full">Sign in</Button>
+          <Button className="w-full" onClick={(e) => makeRequest(e)}> {loading ? 'loading...' : 'Sign In'}</Button>
         </CardFooter>
         <div className="text-center mt-4 text-sm pt-0 pb-5 hover:cursor-pointer hover:border-b-2 hover:border-black" onClick={() => router.push('/register')}>
           {/* <a href="#" className="text-blue-600 hover:underline"> */}
